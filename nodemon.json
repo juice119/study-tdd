@@ -1,0 +1,4 @@
+{
+  "verbose": true,
+  "ignore": [".gitignore", ".eslintignore", "eslintrc.json", ",*.test.js", "fixtures/*"]
+}
