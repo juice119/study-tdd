@@ -1,5 +1,35 @@
-test('two plus tow is four', () => {
-  expect(2 + 2).toBe(4);
+test('two plus tow is four',  async () => {
+  function fn1() {
+    return Promise.reject('reject');
+  }
+
+  function fnThrow() {
+    throw 'fnThrow';
+  }
+
+  function fnError() {
+    return new Error('test');
+  }
+
+  function ac1() {
+    // fn1();
+    // fnThrow();
+    fnError();
+  }
+
+  function ac2() {
+    return new Promise<string>((res, rej) => {
+      fnThrow();
+      res('res');
+    });
+  }
+
+  // ac1();
+  // await expect(ac2()).resolves.toBe("");
+  await expect(ac2()).rejects.toMatch('fnThrow');
+  // await expect('test').toMatch('test');
+  expect(2 + 2)
+    .toBe(4);
 });
 
 test('mock function test', () => {
