@@ -15,6 +15,9 @@ export class Product {
     if (this.validationId()) {
       throw new Error('id 로직에 문제 있음');
     }
+    if (this.validationPrice()) {
+      throw new Error('price 데이터에 문제가 있음');
+    }
     return null;
   }
 
@@ -23,6 +26,10 @@ export class Product {
       return false;
     }
     return true;
+  }
+
+  validationPrice() {
+    return Number.isInteger(this._price);
   }
 
   getRegPrice(): number {
