@@ -4,14 +4,14 @@ import Product from '../models/Product';
 
 type Request = express.Request;
 type Response = express.Response;
-type Next = express.NextFunction;
-type retType = Request | Next;
+type Next = express.NextFunction | null;
 
-export async function createProduct(req: Request, res: Response, next: Next): Promise<retType> {
+export async function createProduct(req: Request, res: Response, next: Next): Promise<Response> {
   try {
-    const productResult = await Product.create(req.body);
-    return res.json(req.body);
+    const createResult = Product.create(req.body);
+    return res.status(201).json(createResult);
   } catch (e) {
+    // @ts-ignore
     return next(e);
   }
 }
